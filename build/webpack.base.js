@@ -4,7 +4,11 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
-  entry: './src/main.js',
+  entry: [
+    "core-js/modules/es6.promise", // babel 异步分割插件需要配置的内容
+    "core-js/modules/es6.array.iterator", // babel 异步分割插件需要配置的内容
+    './src/main.js' // 入口文件
+  ],
   plugins: [
     new VueLoaderPlugin(), // Vue加载
     new CleanWebpackPlugin(), // 清理输出内容，自动根据output的内容来清理。

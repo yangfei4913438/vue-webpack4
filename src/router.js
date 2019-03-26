@@ -1,7 +1,5 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import Heart from './components/heart.vue';
-import Round from './components/round.vue';
 
 Vue.use(Router);
 
@@ -11,12 +9,12 @@ export default new Router({
     {
       path: '/heart',
       name: 'Heart',
-      component: Heart
+      component: () => import('./components/heart.vue')
     },
     {
       path: '/round',
       name: 'Round',
-      component: Round
+      component: () => import('./components/round.vue')
     }
   ]
 })
