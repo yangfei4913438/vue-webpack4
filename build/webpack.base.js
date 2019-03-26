@@ -1,5 +1,4 @@
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
@@ -11,7 +10,6 @@ module.exports = {
   ],
   plugins: [
     new VueLoaderPlugin(), // Vue加载
-    new CleanWebpackPlugin(), // 清理输出内容，自动根据output的内容来清理。
     new HtmlWebpackPlugin({ // 根据模板自动生成html文件
       filename: "index.html",
       template: "./public/index.html"

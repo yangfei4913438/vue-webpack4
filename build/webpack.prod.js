@@ -1,5 +1,6 @@
 const merge = require('webpack-merge');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 const baseWebpackConfig = require("./webpack.base");
 const path = require('path');
 
@@ -11,7 +12,8 @@ module.exports = merge(baseWebpackConfig, {
     path: path.resolve(__dirname, '../dist')
   },
   plugins: [
-    new MiniCssExtractPlugin({
+    new CleanWebpackPlugin(), // 清理输出内容，自动根据output的内容来清理。
+    new MiniCssExtractPlugin({ // css打包配置
       filename: 'css/[name].[contenthash].css',
       chunkFilename: 'css/[id].[contenthash].css'
     })
