@@ -49,11 +49,7 @@ module.exports = {
             name: 'fonts/[name].[hash:7].[ext]' // 将字体放入 fonts 文件夹下
           }
         }]
-      },
-      {
-        test: /\.ico$/,
-        loader: 'file-loader?name=[name].[ext]'
       }
     ]
   }
-}
+};

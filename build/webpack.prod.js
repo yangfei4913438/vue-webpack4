@@ -31,4 +31,4 @@ module.exports = merge(baseWebpackConfig, {
       use: [MiniCssExtractPlugin.loader, "css-loader", 'postcss-loader', "stylus-loader"]
     }]
   }
-})
+});

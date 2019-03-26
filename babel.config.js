@@ -5,12 +5,12 @@ const presets = [
       },
       modules: false
   }]
-]
+];
 
 const plugins = [
-]
+];
 
 module.exports = {
   presets,
   plugins
-}
+};

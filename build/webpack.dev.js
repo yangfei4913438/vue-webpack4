@@ -1,5 +1,5 @@
-const merge = require("webpack-merge")
-const baseWebpackConfig = require("./webpack.base")
+const merge = require("webpack-merge");
+const baseWebpackConfig = require("./webpack.base");
 
 module.exports = merge(baseWebpackConfig, {
   mode: 'development', // development 开发模式 => 构建的js, 不会压缩
@@ -30,4 +30,4 @@ module.exports = merge(baseWebpackConfig, {
       use: ["vue-style-loader", "css-loader", 'postcss-loader', "stylus-loader"]
     }]
   }
-})
+});
