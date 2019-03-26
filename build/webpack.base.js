@@ -54,6 +54,14 @@ module.exports = {
             name: 'fonts/[name].[hash:7].[ext]' // 将字体放入 fonts 文件夹下
           }
         }]
+      },
+      {
+        test: /\.(mp4|webm|ogg|mp3|wav|flac|aac)(\?.*)?$/,
+        loader: 'url-loader',
+        options: {
+          limit: 10000,
+          name: 'media/[name].[hash:7].[ext]' // 媒体文件放入 media 文件夹下
+        }
       }
     ]
   }
