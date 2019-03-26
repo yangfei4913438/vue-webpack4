@@ -19,6 +19,9 @@ module.exports = {
       },
     ])
   ],
+  optimization: {
+    splitChunks: {} // 使用默认配置，对异步代码做分割处理。tips：同步代码做分割意义不大。
+  },
   module: {
     rules: [
       {
