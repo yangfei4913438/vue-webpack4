@@ -13,6 +13,11 @@
 
 ```shell
 cd 项目名称
+
+# 删除git信息
+rm -rf .git
+
+# 初始化项目
 yarn
 ```
 
