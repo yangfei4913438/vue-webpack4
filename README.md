@@ -5,12 +5,12 @@
 
 #### 1. 下载
 
-`git clone 项目url`
+`git clone git@github.com:yangfei4913438/vue-webpack4.git 项目名称`
 
 #### 2、初始化
 
 ```shell
-cd vue-webpack4
+cd 项目名称
 yarn
 ```
 
@@ -28,8 +28,8 @@ server {
     listen       8000;
     server_name  127.0.0.1;
 
-    # 这里写项目的绝对路径【一定要改！！】
-    root /vue-webpack4/dist;
+    # 这里写项目的绝对路径
+    root 打包好的dist目录的绝对路径;
     index index.html;
 
     # url 切换时始终返回index.html, 因为只有vue的js文件才知道怎么切换路由。
