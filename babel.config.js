@@ -9,7 +9,8 @@ const presets = [
 
 const plugins = [
   "@babel/plugin-syntax-dynamic-import",
-  "@babel/plugin-transform-runtime"
+  "@babel/plugin-transform-runtime",
+  ["import", { "libraryName": "ant-design-vue", "libraryDirectory": "es", "style": "css" }]
 ];
 
 module.exports = {
