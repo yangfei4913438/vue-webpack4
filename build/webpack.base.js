@@ -12,17 +12,26 @@ module.exports = {
     new VueLoaderPlugin(), // Vue加载
     new HtmlWebpackPlugin({ // 根据模板自动生成html文件
       filename: "index.html",
-      template: "./public/index.html"
+      template: "./static/index.html"
     }),
     new CopyWebpackPlugin([
       {
-        from: './public/favicon.ico',  // 将项目图标拷贝到打包目录
-        to: 'favicon.ico'
+        from: './static',  // 将静态文件拷贝到打包目录
+        to: 'static'
       },
     ])
   ],
   optimization: {
     splitChunks: {} // 使用默认配置，对异步代码做分割处理。tips：同步代码做分割意义不大。
+  },
+  // 配置导入vue文件，不需要写.vue结尾
+  resolve: {
+    extensions: ['.js', '.vue', '.json'],
+    alias: {
+      // 使用ES6规范引入vue的，即使用import语法导入vue模块，所以需要将vue的构建版本设置为vue.esm.js。
+      // 使用commonjs规范引入vue，即使用require语法导入vue模块，那么就需要vue的构建版本设置为vue.commonjs.js。
+      'vue$': 'vue/dist/vue.esm.js'
+    }
   },
   module: {
     rules: [
