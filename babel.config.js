@@ -8,7 +8,8 @@ const presets = [
 ];
 
 const plugins = [
-  "@babel/plugin-syntax-dynamic-import"
+  "@babel/plugin-syntax-dynamic-import",
+  "@babel/plugin-transform-runtime"
 ];
 
 module.exports = {
