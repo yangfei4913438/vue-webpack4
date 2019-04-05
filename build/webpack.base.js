@@ -11,6 +11,8 @@ module.exports = {
   plugins: [
     new VueLoaderPlugin(), // Vue加载
     new HtmlWebpackPlugin({ // 根据模板自动生成html文件
+      title: 'Vue Webpack4 Demo',
+      favicon: path.resolve(__dirname, '../static/favicon.ico'), //favicon路径
       minify: { // 压缩HTML文件
         removeComments: true, // 移除HTML中的注释
         collapseWhitespace: true, // 删除空白符与换行符
