@@ -31,7 +31,8 @@ module.exports = {
   },
   // 配置导入vue文件，不需要写.vue结尾
   resolve: {
-    extensions: ['.js', '.vue', '.json'],
+    extensions: ['.js', '.vue', '.json'], // 找不到最后面的时候，先匹配.js，然后匹配.vue, 最后匹配.json
+    mainFiles: ['index', 'main'], // import文件夹，如果路径中不指定文件名。那么默认先匹配文件夹下，index文件，再匹配main文件。
     alias: {
       // 使用ES6规范引入vue的，即使用import语法导入vue模块，所以需要将vue的构建版本设置为vue.esm.js。
       // 使用commonjs规范引入vue，即使用require语法导入vue模块，那么就需要vue的构建版本设置为vue.commonjs.js。
