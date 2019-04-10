@@ -1,5 +1,4 @@
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
-const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
@@ -10,17 +9,6 @@ module.exports = {
   ],
   plugins: [
     new VueLoaderPlugin(), // Vue加载
-    new HtmlWebpackPlugin({ // 根据模板自动生成html文件
-      title: 'Vue Webpack4 Demo',
-      favicon: path.resolve(__dirname, '../static/favicon.ico'), //favicon路径
-      minify: { // 压缩HTML文件
-        removeComments: true, // 移除HTML中的注释
-        collapseWhitespace: true, // 删除空白符与换行符
-        minifyCSS: true// 压缩内联css
-      },
-      filename: "index.html",
-      template: "index.html"
-    }),
     new CopyWebpackPlugin([
       {
         from: './static',  // 将静态文件拷贝到打包目录

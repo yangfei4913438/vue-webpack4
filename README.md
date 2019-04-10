@@ -1,9 +1,7 @@
-# 项目说明
-下载好本项目之后，直接用vue2.6和webpack4，创建一个新的vue项目。无需使用vue-cli来创建下载一大堆默认的包。
+## 项目说明
+本项目初始化之后，相当于直接用 vue2.6 和 webpack4, 创建一个新的vue项目。无需使用vue-cli来创建下载一大堆默认的包。
 
-> 提示: 本项目不太适合对webpack完全不了解的人使用，使用本项目之前，请确认你对webpack有一定的了解。
-
-# 操作步骤
+### 操作步骤
 
 #### 1. 下载
 
@@ -29,17 +27,6 @@ yarn
 
 `yarn run build`
 
-# 上线nginx配置(精简版)
-```shell
-server {
-    listen       8000;
-    server_name  127.0.0.1;
+#### 5、NGINX 配置注意事项
 
-    # 这里写项目的绝对路径
-    root 打包好的dist目录的绝对路径;
-    index index.html;
-
-    # url 切换时始终返回index.html, 因为只有vue的js文件才知道怎么切换路由。
-    try_files $uri /index.html;
-}
-```
+> 部署需要配置 gizp 压缩支持
