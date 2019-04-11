@@ -71,7 +71,7 @@ module.exports = merge(baseWebpackConfig, {
     }),
     new HtmlWebpackPlugin({ // 根据模板自动生成html文件
       title: 'Vue Webpack4 Demo',
-      favicon: path.resolve(__dirname, '../static/favicon.ico'), //favicon路径
+      favicon: path.resolve(__dirname, '../src/assets/favicon.ico'), //favicon路径
       filename: 'index.html',
       template: 'index.html',
       inject: true,

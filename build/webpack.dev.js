@@ -19,6 +19,9 @@ module.exports = merge(baseWebpackConfig, {
       '/project': {
         target: 'http://127.0.0.1:8888',
         pathRewrite: {'^/project' : '/'} // 开头的 /project 路径，会被替换为http://127.0.0.1:8888/路径
+      },
+      '/api': {
+        target: 'http://localhost:5000' // 代理 mock 服务的请求
       }
     }
   },
@@ -44,7 +47,7 @@ module.exports = merge(baseWebpackConfig, {
     // https://github.com/ampedandwired/html-webpack-plugin
     new HtmlWebpackPlugin({
       title: 'Vue Webpack4 Demo',
-      favicon: path.resolve(__dirname, '../static/favicon.ico'), //favicon路径
+      favicon: path.resolve(__dirname, '../src/assets/favicon.ico'), //favicon路径
       filename: 'index.html',
       template: 'index.html'
     })

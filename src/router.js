@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import Router from 'vue-router';
+import Home from './pages/home'
 
 Vue.use(Router);
 
@@ -7,14 +8,9 @@ export default new Router({
   mode: 'history',
   routes: [
     {
-      path: '/heart',
-      name: 'Heart',
-      component: () => import('./components/heart.vue')
-    },
-    {
-      path: '/round',
-      name: 'Round',
-      component: () => import('./components/round.vue')
+      path: '/',
+      name: 'Home',
+      component: Home
     }
   ]
 })
