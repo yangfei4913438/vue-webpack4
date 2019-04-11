@@ -78,25 +78,19 @@ export default {
       // 根据选定的日期过滤出要显示的账单列表
       return state.list.filter(o => o.date.includes(state.choose_date))
     },
-    // 根据过滤好的账目列表，计算出收入金额
-    getTotalIncome (state, getters) {
+    // 根据过滤好的账目列表，计算出收入和支出金额
+    // 因为 getter 计算过的值会被缓存起来，所以多次引用，也只会计算一次。直到依赖的值发生改变才会被重新计算。
+    getTotalPrice (state, getters) {
       let income = 0;
+      let expense = 0;
       getters.getRecordList.forEach(item => {
         if (item.type === 'income') {
           income += item.price
-        }
-      });
-      return income
-    },
-    // 根据过滤好的账目列表，计算出支出金额
-    getTotalExpense (state, getters) {
-      let expense = 0;
-      getters.getRecordList.forEach(item => {
-        if (item.type === 'expense') {
+        } else {
           expense += item.price
         }
       });
-      return expense
+      return [income, expense]
     }
   }
 }
