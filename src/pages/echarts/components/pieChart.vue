@@ -9,17 +9,21 @@
     props: {
       title: {
         type: Object,
-        default: {
-          name: '',
-          subtitle: '',
-          show: false
+        default () {  // Array 和 Object 的默认值，需要写成函数格式。
+          return {
+            name: '',
+            subtitle: '',
+            show: false
+          }
         }
       },
       tip: {
         type: Object,
-        default: {
-          title: '',
-          show: false
+        default () {
+          return {
+            title: '',
+            show: false
+          }
         }
       },
       showLegend: {
@@ -32,10 +36,12 @@
       },
       data: {
         type: Array,
-        default: [{
-          value: 0,
-          name: ''
-        }]
+        default () {
+          return [{
+            value: 0,
+            name: ''
+          }]
+        }
       }
     },
     mounted () {
