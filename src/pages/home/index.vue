@@ -35,7 +35,24 @@
         <span slot="tab">
           <font-awesome-icon :icon="['fas','chart-pie']" /> {{$t('btn.chartMode')}}
         </span>
-        Tab 2
+        <!-- 新增按钮 -->
+        <a-button type="primary" class="add-record" style="margin-bottom: 50px">
+          <font-awesome-icon :icon="['fas','plus-circle']" style="margin-right: 8px" /> {{$t('btn.add_record')}}
+        </a-button>
+        <a-row>
+          <a-col :span="12" style="height: 450px">
+            <pie-chart :tip="$store.getters['home/getChartProps'][0].tip"
+                       :radius="$store.getters['home/getChartProps'][0].radius"
+                       :data="$store.getters['home/getChartProps'][0].data"
+            />
+          </a-col>
+          <a-col :span="12" style="height: 450px">
+            <pie-chart :tip="$store.getters['home/getChartProps'][1].tip"
+                       :radius="$store.getters['home/getChartProps'][1].radius"
+                       :data="$store.getters['home/getChartProps'][1].data"
+            />
+          </a-col>
+        </a-row>
       </a-tab-pane>
     </a-tabs>
   </div>
@@ -46,6 +63,7 @@
   import ACol from "ant-design-vue/es/grid/Col";
   import Total from './components/total';
   import RecordList from './components/record_list';
+  import PieChart from '../echarts/components/pieChart';
   import ExportJsonExcel from 'js-export-excel';
   export default {
     name: 'Home',
@@ -54,7 +72,8 @@
       ACol,
       ARow,
       Total,
-      RecordList
+      RecordList,
+      PieChart
     },
     data() {
       return {

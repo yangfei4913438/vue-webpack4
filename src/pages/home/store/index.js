@@ -5,7 +5,7 @@ export default {
   // 数据
   state: {
     showLoading: false, // 是否显示加载动画
-    activeKey: 'list', // 标签页显示哪个标签，list && chart
+    activeKey: 'chart', // 标签页显示哪个标签，list && chart
     list: [], // 账单数据列表
     categories: [], // 账单记录中的图标列表
     choose_date: '' // 日期选项选中的月份
@@ -91,6 +91,28 @@ export default {
         }
       });
       return [income, expense]
+    },
+    // 获取图表数据
+    getChartProps (state, getters) {
+      const incomeData = getters.getRecordList.filter(o => o.type==='income').map(res => ({name: res.event, value: res.price}));
+      const expenseData = getters.getRecordList.filter(o => o.type==='expense').map(res => ({name: res.event, value: res.price}));
+      const incomeProps = {
+        tip: {
+          title: '收入项',
+          show: true
+        },
+        radius: '90%',
+        data: incomeData
+      };
+      const expenseProps = {
+        tip: {
+          title: '支出项',
+          show: true
+        },
+        radius: '90%',
+        data: expenseData
+      };
+      return [ incomeProps, expenseProps ]
     }
   }
 }

@@ -30,10 +30,6 @@
         type: String,
         default: '60%'
       },
-      monitorBrowserSize: {
-        type: Boolean,
-        default: false
-      },
       data: {
         type: Array,
         default: [{
@@ -42,12 +38,27 @@
         }]
       }
     },
-    data () {
-      return {
-      }
-    },
     mounted () {
+      // 初始化的时候肯定要创建饼图
       this.createChart()
+    },
+    watch: {
+      // 每一项变动，都需要更新饼图
+      title () {
+        this.createChart()
+      },
+      tip () {
+        this.createChart()
+      },
+      showLegend () {
+        this.createChart()
+      },
+      radius () {
+        this.createChart()
+      },
+      data () {
+        this.createChart()
+      }
     },
     methods: {
       createChart () {
@@ -55,16 +66,16 @@
         this.echarts.registerTheme('wonderland', themeJson);
 
         // 使用 svg 渲染器, 如果要使用canvas，直接修改renderer的值为canvas即可。
-        let myChart = this.echarts.init(this.$refs.svgRef, 'wonderland', {renderer: 'svg'});
+        let myChart = this.echarts.init(this.$refs.svgRef, 'wonderland', {renderer: 'canvas'});
 
         let option = {
           series : [
             {
-              name: this.props.tip.title,
+              name: this.tip.title,
               type: 'pie',
-              radius: this.props.radius,
+              radius: this.radius,
               center: ['50%', '50%'],
-              data: this.props.data,
+              data: this.data,
               itemStyle: {
                 emphasis: {
                   shadowBlur: 10,
@@ -76,36 +87,34 @@
           ]
         };
 
-        if (this.props.title.show) {
+        if (this.title.show) {
           option.title = {
-            text: this.props.title.name,
-            subtext: this.props.title.subtitle,
+            text: this.title.name,
+            subtext: this.title.subtitle,
             x: 'right'
           };
         }
 
-        if (this.props.tip.show) {
+        if (this.tip.show) {
           option.tooltip = {
             trigger: 'item',
-            formatter: this.props.tip.title ? "{a} <br/>{b} : {c} ({d}%)" : "{b} : {c} ({d}%)"
+            formatter: this.tip.title ? "{a} <br/>{b} : {c} ({d}%)" : "{b} : {c} ({d}%)"
           }
         }
 
-        if (this.props.showLegend) {
+        if (this.showLegend) {
           option.legend = {
             orient: 'vertical',
             left: 'left',
-            data: this.props.data.map(o => o.name)
+            data: this.data.map(o => o.name)
           };
         }
 
+        myChart.clear();
         myChart.setOption(option, true);
-
-        if (this.props.monitorBrowserSize) {
-          window.onresize = function(){
-            myChart.resize()
-          };
-        }
+        window.onresize = function(){
+          myChart.resize()
+        };
       }
     }
   }
