@@ -21,7 +21,7 @@ module.exports = merge(baseWebpackConfig, {
         pathRewrite: {'^/project' : '/'} // 开头的 /project 路径，会被替换为http://127.0.0.1:8888/路径
       },
       '/api': {
-        target: 'http://localhost:5000' // 代理 mock 服务的请求
+        target: 'http://localhost:5000' // 代理 mock 服务的请求, 相当于是 /api 开头的全部匹配到 http://localhost:5000/api
       }
     }
   },

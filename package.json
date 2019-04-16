@@ -8,7 +8,7 @@
     "start": "concurrently \"yarn run dev\"  \"yarn run mock\" ",
     "build": "webpack --progress --config build/webpack.prod.js",
     "dev": "webpack-dev-server --progress --config build/webpack.dev.js",
-    "mock": "json-server --watch src/mock/data.json --routes src/mock/routes.json --port 5000 -d 2000"
+    "mock": "json-server --watch src/mock/data.json --routes src/mock/routes.json --port 5000 -d 300"
   },
   "devDependencies": {
     "@babel/cli": "^7.2.3",

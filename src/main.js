@@ -5,7 +5,7 @@ import { i18n } from './lang'
 import tools from './tools'
 import echarts from 'echarts'
 import store from './store'
-import { message, LocaleProvider, Row, Col, Radio, DatePicker, Tabs, Icon, Button } from 'ant-design-vue'
+import { message, LocaleProvider, Row, Col, Radio, DatePicker, Tabs, Icon, Button, Form, Input, InputNumber } from 'ant-design-vue'
 
 // 清空浏览器默认样式
 import './assets/styles/reset.css'
@@ -24,7 +24,7 @@ Vue.component('font-awesome-layers', FontAwesomeLayers);
 Vue.component('font-awesome-layers-text', FontAwesomeLayersText);
 
 // 批量注册组件
-[ LocaleProvider, Row, Col, Radio, DatePicker, Tabs, Icon, Button ].map(item => Vue.use(item));
+[ LocaleProvider, Row, Col, Radio, DatePicker, Tabs, Icon, Button, Form, Input, InputNumber ].map(item => Vue.use(item));
 
 // antd 消息组件
 Vue.prototype.$message = message;

@@ -4,7 +4,12 @@ module.exports = function (api) {
   const presets = [
     ["@babel/preset-env", {
       targets: {
-        browsers: ["> 1%", "last 2 versions", "not ie <= 8"]
+        browsers: [
+          ">0.2%",
+          "not dead",
+          "not ie <= 11",
+          "not op_mini all"
+        ]
       },
       corejs: 2,
       useBuiltIns: "usage"

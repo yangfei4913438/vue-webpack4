@@ -45,10 +45,17 @@
       }
     },
     mounted () {
+      this.initData()
     },
     methods: {
       setLocale(locale) {
         this.locale = locale
+      },
+      initData () {
+        // 开启加载动画
+        this.$store.commit('home/setShowLoading', true);
+        // 获取初始化数据，超过 1 个参数的时候，需要封装成一个对象来传值。
+        this.$store.dispatch('home/getInitData', {axios: this.$axios, rootStore: this.$store});
       }
     }
   }

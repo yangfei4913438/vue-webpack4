@@ -16,8 +16,8 @@
         <span slot="tab">
           <font-awesome-icon :icon="['fas','book']" /> {{$t('btn.listMode')}}
         </span>
-        <!-- 新增按钮 -->
-        <a-button type="primary" class="add-record">
+        <!-- 新增按钮, 点击转向 /add 路由 -->
+        <a-button type="primary" class="add-record" @click="$router.push('/add')">
           <font-awesome-icon :icon="['fas','plus-circle']" style="margin-right: 8px" /> {{$t('btn.add_record')}}
         </a-button>
         <!-- 账目列表标题 -->
@@ -35,18 +35,14 @@
         <span slot="tab">
           <font-awesome-icon :icon="['fas','chart-pie']" /> {{$t('btn.chartMode')}}
         </span>
-        <!-- 新增按钮 -->
-        <a-button type="primary" class="add-record" style="margin-bottom: 50px">
-          <font-awesome-icon :icon="['fas','plus-circle']" style="margin-right: 8px" /> {{$t('btn.add_record')}}
-        </a-button>
-        <a-row>
-          <a-col :span="12" style="height: 450px">
+        <a-row style="margin-top: 50px">
+          <a-col :span="12" style="height: 400px">
             <pie-chart :tip="$store.getters['home/getChartProps'][0].tip"
                        :radius="$store.getters['home/getChartProps'][0].radius"
                        :data="$store.getters['home/getChartProps'][0].data"
             />
           </a-col>
-          <a-col :span="12" style="height: 450px">
+          <a-col :span="12" style="height: 400px">
             <pie-chart :tip="$store.getters['home/getChartProps'][1].tip"
                        :radius="$store.getters['home/getChartProps'][1].radius"
                        :data="$store.getters['home/getChartProps'][1].data"
@@ -80,17 +76,11 @@
       }
     },
     mounted() {
-      this.initData()
+
     },
     watch: {},
     computed: {},
     methods: {
-      initData () {
-        // 开启加载动画
-        this.$store.commit('home/setShowLoading', true);
-        // 获取初始化数据
-        this.$store.dispatch('home/getInitData', this.$axios);
-      },
       changeDate (e, value) {
         this.$store.commit('home/setChooseDate', value);
       },

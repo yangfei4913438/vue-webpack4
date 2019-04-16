@@ -5,9 +5,8 @@ export default {
   // 数据
   state: {
     showLoading: false, // 是否显示加载动画
-    activeKey: 'chart', // 标签页显示哪个标签，list && chart
+    activeKey: 'list', // 标签页显示哪个标签，list && chart
     list: [], // 账单数据列表
-    categories: [], // 账单记录中的图标列表
     choose_date: '' // 日期选项选中的月份
   },
   // 同步操作, mutations 有一个自带参数 state
@@ -23,19 +22,17 @@ export default {
     },
     setList (state, list) {
       state.list = list
-    },
-    setCategories (state, categories) {
-      state.categories = categories
     }
   },
   // 异步操作, actions 有一个自带参数 store, 包含了所有的对象，具体可以打印查看。
   actions:{
     /**
      * 初始化获取需要的数据
+     * 注意：这里的传值，只能有一个，所以需要包装成一个对象来传值。
      * @param: axios 因为需要异步处理，所以直接把 this.$axios 传进来就行了，不推荐使用原始 js 文件导入的方式来调用。
+     * @param: rootStore 全局的 this.$store 用于发送数据到其他的 vuex 对象中。
      * */
-    async getInitData (store, axios) {
-      console.log(store);
+    async getInitData (store, { axios, rootStore } ) {
       let [ list, categories ] = await Promise.all([
         // 账单列表
         axios.get('/api/v1/list?_sort=id&_order=desc'),
@@ -44,7 +41,8 @@ export default {
       ]);
       // 上面已经变成同步操作了，所以这里可以提交数据。
       store.commit('setList', list.data);
-      store.commit('setCategories', categories.data);
+      // 全局 store 提交数据到 add 组件中去。
+      rootStore.commit('add/setCategories', categories.data);
       // 关闭加载动画。
       store.commit('setShowLoading', false);
     },
