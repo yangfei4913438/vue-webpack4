@@ -1,18 +1,18 @@
-const merge = require('webpack-merge');
-const HtmlWebpackPlugin = require("html-webpack-plugin");
-const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin');
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const CleanWebpackPlugin = require('clean-webpack-plugin');
-const CompressionWebpackPlugin = require('compression-webpack-plugin');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
-const baseWebpackConfig = require("./webpack.base");
-const path = require('path');
-const webpack = require('webpack');
+'use strict'
+const path = require('path')
+const webpack = require('webpack')
+const merge = require('webpack-merge')
+const baseWebpackConfig = require('./webpack.base.conf')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
+const MiniCssExtractPlugin = require("mini-css-extract-plugin")
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+const CompressionWebpackPlugin = require('compression-webpack-plugin')
+const CleanWebpackPlugin = require('clean-webpack-plugin')
 
-
-module.exports = merge(baseWebpackConfig, {
-  mode: 'production', // production 生产模式（默认模式，压缩js）
-  devtool: 'cheap-module-source-map', // 只有行信息、第三方模块、打包方式、源码映射。 建立打包后的代码和源代码的对应关系，该关注第三方插件的错误，便于排错。这里只提示行，不提示列，加快打包速度。
+const webpackConfig = merge(baseWebpackConfig, {
+  mode: 'production',
+  devtool: 'cheap-module-source-map',
   output: {
     path: path.resolve(__dirname, '../dist'),
     filename: 'js/[name].[contenthash].js',
@@ -20,6 +20,29 @@ module.exports = merge(baseWebpackConfig, {
   },
   performance: {
     hints: false
+  },
+  optimization: {
+    splitChunks: {} // 使用默认配置，对异步代码做分割处理。tips：同步代码做分割意义不大。
+  },
+  module: {
+    rules: [
+      {
+        test: /\.css$/,
+        use: [MiniCssExtractPlugin.loader, "css-loader", 'postcss-loader']
+      },
+      {
+        test: /\.less$/,
+        use: [MiniCssExtractPlugin.loader, "css-loader", 'postcss-loader',"less-loader"]
+      },
+      {
+        test: /\.s[ac]ss$/,
+        use: [MiniCssExtractPlugin.loader, "css-loader", 'postcss-loader', "sass-loader"]
+      },
+      {
+        test: /\.(styl|stylus)$/,
+        use: [MiniCssExtractPlugin.loader, "css-loader", 'postcss-loader', "stylus-loader"]
+      }
+    ]
   },
   plugins: [
     new CleanWebpackPlugin(), // 清理输出内容，自动根据output的内容来清理。
@@ -37,9 +60,7 @@ module.exports = merge(baseWebpackConfig, {
         unused: true,
         warnings: false,
         drop_debugger: true,
-        compress: {
-          warnings: false
-        }
+        compress: {}
       }
     }),
     new CompressionWebpackPlugin({
@@ -69,9 +90,10 @@ module.exports = merge(baseWebpackConfig, {
       },
       canPrint: true // 是否将插件信息打印到控制台
     }),
-    new HtmlWebpackPlugin({ // 根据模板自动生成html文件
-      title: 'Vue Webpack4 Demo',
-      favicon: path.resolve(__dirname, '../src/assets/favicon.ico'), //favicon路径
+    // generate dist home.html with correct asset hash for caching.
+    // you can customize output by editing /home.html
+    // see https://github.com/ampedandwired/html-webpack-plugin
+    new HtmlWebpackPlugin({
       filename: 'index.html',
       template: 'index.html',
       inject: true,
@@ -89,20 +111,16 @@ module.exports = merge(baseWebpackConfig, {
     new webpack.HashedModuleIdsPlugin(),
     // enable scope hoisting
     new webpack.optimize.ModuleConcatenationPlugin()
-  ],
-  module: {
-    rules: [{
-      test: /\.css$/,
-      use: [MiniCssExtractPlugin.loader, "css-loader", 'postcss-loader']
-    }, {
-      test: /\.less$/,
-      use: [MiniCssExtractPlugin.loader, "css-loader", 'postcss-loader', "less-loader"]
-    }, {
-      test: /\.s[ac]ss$/,
-      use: [MiniCssExtractPlugin.loader, "css-loader", 'postcss-loader', "sass-loader"]
-    }, {
-      test: /\.(styl|stylus)$/,
-      use: [MiniCssExtractPlugin.loader, "css-loader", 'postcss-loader', "stylus-loader"]
-    }]
-  }
-});
+  ]
+})
+
+// Run the build command with an extra argument to
+// View the bundle analyzer report after build finishes:
+// `npm run build --report`
+// Set to `true` or `false` to always turn it on or off
+if (process.env.npm_config_report) {
+  const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
+  webpackConfig.plugins.push(new BundleAnalyzerPlugin())
+}
+
+module.exports = webpackConfig
