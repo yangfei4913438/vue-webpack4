@@ -7,6 +7,9 @@ import echarts from 'echarts'
 import store from './store'
 import { message, LocaleProvider, Row, Col, Radio, DatePicker, Tabs, Icon, Button, Form, Input, InputNumber } from 'ant-design-vue'
 
+// 加载 svg
+import './icons'
+
 // 清空浏览器默认样式
 import './assets/styles/reset.css'
 // 避免某些情况下1像素边框变成多像素
