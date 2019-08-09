@@ -8,7 +8,7 @@ const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
 const MiniCssExtractPlugin = require("mini-css-extract-plugin")
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const CompressionWebpackPlugin = require('compression-webpack-plugin')
-const CleanWebpackPlugin = require('clean-webpack-plugin')
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 
 const webpackConfig = merge(baseWebpackConfig, {
   mode: 'production',
