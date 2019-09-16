@@ -3,6 +3,7 @@
 
 # production
 /dist
+/dll
 
 # 测试文件
 /coverage

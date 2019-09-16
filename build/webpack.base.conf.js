@@ -1,48 +1,12 @@
 'use strict'
-const fs = require('fs')
 const path = require('path')
 const webpack = require('webpack')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
-const AddAssetHtmlWebpackPlugin = require('add-asset-html-webpack-plugin')
 
 function resolve (dir) {
   return path.join(__dirname, '..', dir)
 }
-
-let plugins = [
-  new VueLoaderPlugin(), // Vue加载
-  // copy custom static assets
-  new CopyWebpackPlugin([
-    {
-      from: path.resolve(__dirname, '../static'),
-      to: 'static',
-      ignore: ['.*']
-    }
-  ]),
-  // 让 moment.js 中的语言文件，按需加载。使用的时候配置即可。没有导入的语言文件不会被加载。
-  // 默认情况下，加载moment.js会导入全部的语言文件。
-  new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
-]
-
-// 动态添加第三方打包好的组件
-// 引入 node.js 核心库，获取第三方库文件夹下的文件名数组
-const files = fs.readdirSync(path.resolve(__dirname, '../dll'));
-// 遍历数组，根据指定的条件，生成插件的第三方库加载代码。
-files.forEach(file => {
-  if (/.*\.dll.js/.test(file)) {
-    // 添加指定的文件，到 html 文件中去。
-    plugins.push(new AddAssetHtmlWebpackPlugin({
-      filepath: path.resolve(__dirname, '../dll', file)
-    }))
-  }
-  if (/.*\.manifest.json/.test(file)) {
-    // 这个插件避免 webpack 重复打包第三方库，如果要打包第三方库，会先到这个映射文件中去找，已经打包好的。
-    plugins.push(new webpack.DllReferencePlugin({
-      manifest: path.resolve(__dirname, '../dll', file)
-    }))
-  }
-});
 
 module.exports = {
   context: path.resolve(__dirname, '../'),
@@ -54,7 +18,20 @@ module.exports = {
       './src/main.js'
     ]
   },
-  plugins,
+  plugins: [
+    new VueLoaderPlugin(), // Vue加载
+    // copy custom static assets
+    new CopyWebpackPlugin([
+      {
+        from: path.resolve(__dirname, '../static'),
+        to: 'static',
+        ignore: ['.*']
+      }
+    ]),
+    // 让 moment.js 中的语言文件，按需加载。使用的时候配置即可。没有导入的语言文件不会被加载。
+    // 默认情况下，加载moment.js会导入全部的语言文件。
+    new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
+  ],
   resolve: {
     extensions: ['.js', '.vue', '.json'],
     mainFiles: ['index', 'main'],

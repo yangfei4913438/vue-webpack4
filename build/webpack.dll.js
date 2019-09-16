@@ -1,6 +1,7 @@
 // 创建文件 webpack.dll.js
-const path = require('path');
-const webpack = require('webpack');
+const path = require('path')
+const webpack = require('webpack')
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 
 module.exports = {
   mode: 'production',
@@ -22,6 +23,7 @@ module.exports = {
     hints: false
   },
   plugins: [
+    new CleanWebpackPlugin(), // 清理输出内容，自动根据output的内容来清理。
     // 引入打包好的DLL文件
     new webpack.DllPlugin({
       name: '[name]', // 上面暴露出去的库名称
