@@ -7,7 +7,6 @@ module.exports = {
   mode: 'production',
   entry: {
     vue: ['vue', 'vuex', 'vue-router', 'vue-i18n'],
-    antd: ['ant-design-vue'],
     moment: ['moment'],
     chart: ['echarts'],
     fortawesome_core: ['@fortawesome/fontawesome-svg-core', '@fortawesome/vue-fontawesome'],
