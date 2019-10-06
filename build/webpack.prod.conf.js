@@ -39,7 +39,7 @@ let plugins = [
     test: /\.(js|css|html|svg|png|jpg|jpeg)$/,
     threshold: 10240, // 只处理比这个值大的资源。按字节计算。
     minRatio: 0.8, // 只有压缩率比这个值小的资源才会被处理（minRatio = 压缩大小 / 原始大小）
-    deleteOriginalAssets: false // 删除原始资源. nginx会先判断是否有.gz后缀的相同文件(这就表示需要两个文件，一个是压缩前的，一个是压缩后的。)
+    deleteOriginalAssets: false // 不删除原始资源. nginx会先判断是否有.gz后缀的相同文件(这就表示需要两个文件，一个是压缩前的，一个是压缩后的。)
     // 有的话，就直接返回，nginx自己不再进行压缩处理。 如果删除源文件，那么 NGINX 处理会有问题的！！！
   }),
   // Compress extracted CSS. We are using this plugin so that possible
