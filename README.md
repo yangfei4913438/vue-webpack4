@@ -29,6 +29,8 @@ yarn
 
 #### 4、打包项目
 
+`yarn run build:dll`
+
 `yarn run build`
 
 #### 5、NGINX 配置注意事项
