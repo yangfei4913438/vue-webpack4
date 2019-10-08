@@ -12,9 +12,6 @@ module.exports = {
   context: path.resolve(__dirname, '../'),
   entry: {
     app: [
-      '@babel/polyfill',
-      "core-js/modules/es6.promise", // babel 异步分割插件需要配置的内容
-      "core-js/modules/es6.array.iterator", // babel 异步分割插件需要配置的内容
       './src/main.js'
     ]
   },

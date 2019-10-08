@@ -4,7 +4,8 @@ module.exports = function (api) {
   const presets = [
     ["@babel/preset-env", {
       corejs: 2,
-      useBuiltIns: "usage"
+      useBuiltIns: "usage" // 指定 useBuiltIns: 'usage'的话，那么就不要在webpack.config.js 的 entry array 和source 中包含 @babel/polyfill 了。
+      // 注意: @babel/polyfill 依然需要安装
     }]
   ];
 
