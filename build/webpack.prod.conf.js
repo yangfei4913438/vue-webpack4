@@ -87,7 +87,7 @@ let plugins = [
 const files = fs.readdirSync(path.resolve(__dirname, '../dll'));
 // 遍历数组，根据指定的条件，生成插件的第三方库加载代码。
 files.forEach(file => {
-  if (/.*\.dll.js/.test(file)) {
+  if (/.*\.dll.js$/.test(file)) {
     // 添加指定的文件，到 html 文件中去。
     plugins.push(new AddAssetHtmlWebpackPlugin({
       filepath: path.resolve(__dirname, '../dll', file)
