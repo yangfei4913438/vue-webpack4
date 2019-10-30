@@ -12,7 +12,6 @@ const fs = require('fs')
 
 // 更新版本号
 function updateVersion() {
-  // 修改版本号
   const projectConfig = require('../package.json')
   let ver = projectConfig.version.split('.')
   ver[3] = parseInt(ver[3]) + 1
@@ -45,6 +44,8 @@ function updateVersion() {
     })
   })
 }
+// 执行更新，版本号更新需要先执行，否则配置文件读出去就是上一个版本的。
+updateVersion()
 
 const spinner = ora('building for production...')
 spinner.start()
@@ -72,7 +73,5 @@ rm(path.join(path.resolve(__dirname, '../dist'), 'static'), err => {
       '  Tip: built files are meant to be served over an HTTP server.\n' +
       '  Opening home.html over file:// won\'t work.\n'
     ))
-    // 更新小版本号
-    updateVersion()
   })
 })
